@@ -175,6 +175,14 @@ namespace cap_revision_sec321
                 {
                     Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Consignee_Address + " - ConsigneeAddress");
                 }
+                //ShipperCityCheck
+                bool shipper_city_check = ShipperCityCheck(oShipment.Consignee_Address);
+
+                if (!shipper_city_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Consignee_Address + " - ConsigneeAddress");
+                }
+
             });
 
             Log(lstShipments.Count + " LINES PROCESSED.");
@@ -300,7 +308,21 @@ namespace cap_revision_sec321
 
             return result;
         }
-        //Consignee Address
+        public static bool ShipperCityCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[A-Z]+$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        //Shipper City
+
         public static void LogToFile(string message, string time_stamp)
         {//DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt")
             using (StreamWriter sw = new StreamWriter(@"C:\Users\PJUAREZ\source\repos\cap_revision_sec321\cap_revision_sec321\bin\Debug\netcoreapp3.1\Files\Logs.txt", true))
