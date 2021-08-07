@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PJUAREZ\\source\\repos\\cap_revision_sec321\\cap_revision_sec321\\cap_revision_sec321.csproj": {}
+    "C:\\Users\\pablo\\source\\repos\\ImportFromExcel\\cap_revision_sec321\\cap_revision_sec321.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PJUAREZ\\source\\repos\\cap_revision_sec321\\cap_revision_sec321\\cap_revision_sec321.csproj": {
+    "C:\\Users\\pablo\\source\\repos\\ImportFromExcel\\cap_revision_sec321\\cap_revision_sec321.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PJUAREZ\\source\\repos\\cap_revision_sec321\\cap_revision_sec321\\cap_revision_sec321.csproj",
+        "projectUniqueName": "C:\\Users\\pablo\\source\\repos\\ImportFromExcel\\cap_revision_sec321\\cap_revision_sec321.csproj",
         "projectName": "cap_revision_sec321",
-        "projectPath": "C:\\Users\\PJUAREZ\\source\\repos\\cap_revision_sec321\\cap_revision_sec321\\cap_revision_sec321.csproj",
-        "packagesPath": "C:\\Users\\PJUAREZ\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PJUAREZ\\source\\repos\\cap_revision_sec321\\cap_revision_sec321\\obj\\",
+        "projectPath": "C:\\Users\\pablo\\source\\repos\\ImportFromExcel\\cap_revision_sec321\\cap_revision_sec321.csproj",
+        "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pablo\\source\\repos\\ImportFromExcel\\cap_revision_sec321\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\PJUAREZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

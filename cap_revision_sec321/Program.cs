@@ -105,13 +105,27 @@ namespace cap_revision_sec321
         {
             Console.WriteLine("Hello World!");
             //C:\Users\PJUAREZ\source\repos\cap_revision_sec321\cap_revision_sec321\bin\Debug\netcoreapp3.1\PLUMA_NACIONAL.xlsx
-            string FilePath = @"C:\Users\PJUAREZ\source\repos\cap_revision_sec321\cap_revision_sec321\bin\Debug\netcoreapp3.1\files\PLUMA_NACIONAL.xlsx";
+            //C:\Users\PJUAREZ\source\repos\cap_revision_sec321\cap_revision_sec321\bin\Debug\netcoreapp3.1\
+            string FilePath = @"files\PLUMA_NACIONAL.xlsx";
             string Sheet = "Shipments";
 
             List<Shipment> lstShipments = Shipment.Import_To_Grid(FilePath, Sheet);
 
             lstShipments.ForEach(oShipment => {
 
+                bool shipment_control_check = ShipmentControlNumberCheck(oShipment.Shipment_Control_Number);
+
+                if (!shipment_control_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Shipment_Control_Number + " - ShipmentControlNumber");
+                }
+
+                bool shipment_type_check = ShipmentTypeCheck(oShipment.Shipment_Type);
+
+                if (!shipment_type_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Shipment_Type + " - ShipmentType");
+                }
 
                 bool consignee_name_check = ConsigneeNameCheck(oShipment.Consignee_Name);
                 
@@ -133,6 +147,13 @@ namespace cap_revision_sec321
                 {
                     Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Shipper_Postal + " - ShipperPostal");
                 }
+                
+                bool shipper_port_of_landing_check = ShipperPortofLadingCheck(oShipment.Shipper_Port_of_Lading);
+
+                if (!shipper_port_of_landing_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Shipper_Port_of_Lading + " - ShipperPortofLading");
+                }
 
                 bool product_value_check = ProductValueCheck(oShipment.Product_Value);
 
@@ -141,11 +162,81 @@ namespace cap_revision_sec321
                     Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Product_Value + " - ProductValue");
                 }
 
+                bool customer_reference_check = CustomerReferenceCheck(oShipment.Customer_Reference);
+
+                if (!customer_reference_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Customer_Reference + " - CustomerReference");
+                }
+                
+                bool us_port_arrive_check = USPortArriveCheck(oShipment.US_Port_Arrive);
+
+                if (!us_port_arrive_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.US_Port_Arrive + " - USPortArrive");
+                }
+                
+                bool fn_port_loading_check = FnPortLoadingCheck(oShipment.Fn_Port_Loading);
+
+                if (!fn_port_loading_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Fn_Port_Loading + " - FnPortLoading");
+                }
+                
+                bool fn_port_reciept_check = FnPortRecieptCheck(oShipment.Fn_Port_Reciept);
+
+                if (!fn_port_reciept_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Fn_Port_Reciept + " - FnPortReciept");
+                }
+
                 bool consignee_state_check = ConsigneeStateCheck(oShipment.Consignee_State);
 
                 if (!consignee_state_check)
                 {
                     Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Consignee_State + " - ConsigneeState");
+                }
+                
+                bool consignee_portal_check = ConsigneePostalCheck(oShipment.Consignee_Postal);
+
+                if (!consignee_portal_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Consignee_Postal + " - ConsigneePostal");
+                }
+                
+                bool product_description_check = ProductDescriptionCheck(oShipment.Product_Description);
+
+                if (!product_description_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Product_Description + " - ProductDescription");
+                }
+                
+                bool product_qty_check = ProductQtyCheck(oShipment.Product_Qty);
+
+                if (!product_qty_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Product_Qty + " - ProductQty");
+                }
+                
+                bool product_uom_check = ProductUOMCheck(oShipment.Product_UOM);
+
+                if (!product_uom_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Product_UOM + " - ProductUOM");
+                }
+
+                bool product_weight_check = ProductWeightCheck(oShipment.Product_Weight);
+
+                if (!product_weight_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Product_Weight + " - ProductWeight");
+                }
+                
+                bool product_unit_of_weight_check = ProductUnitofWeightCheck(oShipment.Product_Unit_of_Weight);
+
+                if (!product_unit_of_weight_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Product_Unit_of_Weight + " - ProductUnitofWeight");
                 }
 
                 bool shipper_state_check = ShipperStateCheck(oShipment.Shipper_State);
@@ -175,24 +266,71 @@ namespace cap_revision_sec321
                 {
                     Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Consignee_Address + " - ConsigneeAddress");
                 }
-                //ShipperCityCheck
-                bool shipper_city_check = ShipperCityCheck(oShipment.Consignee_Address);
+
+                bool consignee_city_check = ConsigneeCityCheck(oShipment.Consignee_City);
+
+                if (!consignee_city_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Consignee_City + " - ConsigneeCity");
+                }
+
+                bool consignee_country_check = ConsigneeCountryCheck(oShipment.Consignee_Country);
+
+                if (!consignee_country_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Consignee_Country + " - ConsigneeCountry");
+                }
+
+
+                bool shipper_city_check = ShipperCityCheck(oShipment.Shipper_City);
 
                 if (!shipper_city_check)
                 {
-                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Consignee_Address + " - ConsigneeAddress");
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Shipper_City + " - ShipperCity");
+                }
+
+                bool origin_check = OriginCheck(oShipment.Origin);
+
+                if (!origin_check)
+                {
+                    Log("ERROR IN LINE " + oShipment.Id + " DETECTED. VALUE: " + oShipment.Origin + " - Origin");
                 }
 
             });
 
             Log(lstShipments.Count + " LINES PROCESSED.");
         }
-        
+        public static bool ShipmentControlNumberCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[A-Z][0-9]*$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static bool ShipmentTypeCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^SECTION 321$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
         public static bool ConsigneeNameCheck(string password)
         {
             bool result = false;
 
-            Regex rgx = new Regex(@"^[a-zA-Z0-9_ ]*$");
+            Regex rgx = new Regex(@"^[a-zA-Z0-9 ]*$");
 
             if (rgx.IsMatch(password))
             {
@@ -205,7 +343,7 @@ namespace cap_revision_sec321
         {
             bool result = false;
 
-            Regex rgx = new Regex(@"^[a-zA-Z0-9_ ]*$");
+            Regex rgx = new Regex(@"^[a-zA-Z0-9 ]*$");
 
             if (rgx.IsMatch(password))
             {
@@ -228,6 +366,19 @@ namespace cap_revision_sec321
 
             return result;
         }
+        public static bool ShipperPortofLadingCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[a-zA-Z ]*$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
         public static bool ProductValueCheck(string password)
         {
             bool result = false;
@@ -241,11 +392,144 @@ namespace cap_revision_sec321
 
             return result;
         }
+        public static bool CustomerReferenceCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[A-Z][0-9]*$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static bool USPortArriveCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[0-9]{4}$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        
+        public static bool FnPortLoadingCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[0-9]{5}$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static bool FnPortRecieptCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[0-9]{5}$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
         public static bool ConsigneeStateCheck(string password)
         {
             bool result = false;
 
             Regex rgx = new Regex(@"^[A-Z]{2}$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static bool ConsigneePostalCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[0-9]{5}$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static bool ProductDescriptionCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[a-zA-Z0-9 ]*$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static bool ProductQtyCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[0-9]*$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static bool ProductUOMCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[A-Z]*$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        
+        public static bool ProductWeightCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[0-9]*$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        
+        public static bool ProductUnitofWeightCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[A-Z]*$");
 
             if (rgx.IsMatch(password))
             {
@@ -286,7 +570,7 @@ namespace cap_revision_sec321
         {
             bool result = false;
 
-            Regex rgx = new Regex(@"^[A-Z_ ]*$");
+            Regex rgx = new Regex(@"^[A-Z ]*$");
 
             if (rgx.IsMatch(password))
             {
@@ -308,6 +592,32 @@ namespace cap_revision_sec321
 
             return result;
         }
+        public static bool ConsigneeCityCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[A-Z ]*$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static bool ConsigneeCountryCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[A-Z]{2}$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
         public static bool ShipperCityCheck(string password)
         {
             bool result = false;
@@ -321,11 +631,23 @@ namespace cap_revision_sec321
 
             return result;
         }
-        //Shipper City
+        public static bool OriginCheck(string password)
+        {
+            bool result = false;
+
+            Regex rgx = new Regex(@"^[A-Z]{2}$");
+
+            if (rgx.IsMatch(password))
+            {
+                result = true;
+            }
+
+            return result;
+        }
 
         public static void LogToFile(string message, string time_stamp)
         {//DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt")
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\PJUAREZ\source\repos\cap_revision_sec321\cap_revision_sec321\bin\Debug\netcoreapp3.1\Files\Logs.txt", true))
+            using (StreamWriter sw = new StreamWriter(@"Files\Logs.txt", true))
             {
                 sw.WriteLine(time_stamp + " " + message);
             }
